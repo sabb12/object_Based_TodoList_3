@@ -1,32 +1,32 @@
-const store = {
+const newTodo = {
   todos: [],
 };
 
 const getTodos = () => {
-  return store.todos;
+  return newTodo.todos;
 };
 
 const addTodo = ({ title }) => {
-  store.todos = [
-    ...store.todos,
-    { id: store.todos.length + 1, title, completed: false },
+  newTodo.todos = [
+    ...newTodo.todos,
+    { id: newTodo.todos.length + 1, title, completed: false },
   ];
 };
 
 const toggleTodo = todoId => {
-  const todo = store.todos.find(todo => todo.id === todoId);
+  const todo = newTodo.todos.find(todo => todo.id === todoId);
   todo.completed = !todo.completed;
 };
 
 const updateTodo = (todoId, newTitle) => {
-  const todo = store.todos.find(todo => todo.id === todoId);
+  const todo = newTodo.todos.find(todo => todo.id === todoId);
   if (todo) {
     todo.title = newTitle;
   }
 };
 
 const removeTodo = todoId => {
-  store.todos = store.todos.filter(todo => todo.id !== todoId);
+  newTodo.todos = newTodo.todos.filter(todo => todo.id !== todoId);
 };
 
 const form = document.querySelector('form');
@@ -42,7 +42,7 @@ form.addEventListener('submit', (e) => {
   update();
 });
 
-const createLi = todo => {
+const handleCreateTodo = todo => {
   const todoContainer = document.createElement('div');
   todoContainer.classList.add('todoContainer');
   
@@ -113,8 +113,8 @@ const update = () => {
   
   items.map(item => 
     item.completed
-      ? completedUl.appendChild(createLi(item))
-      : todoUl.appendChild(createLi(item))
+      ? completedUl.appendChild(handleCreateTodo(item))
+      : todoUl.appendChild(handleCreateTodo(item))
   );
 };
 
